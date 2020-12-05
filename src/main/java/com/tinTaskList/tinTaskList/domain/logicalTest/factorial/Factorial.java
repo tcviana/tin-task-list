@@ -1,4 +1,4 @@
-package com.tinTaskList.tinTaskList.domain.factorial;
+package com.tinTaskList.tinTaskList.domain.logicalTest.factorial;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;

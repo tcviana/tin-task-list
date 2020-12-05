@@ -1,4 +1,4 @@
-package com.tinTaskList.tinTaskList.domain.addMultiples;
+package com.tinTaskList.tinTaskList.domain.logicalTest.addMultiples;
 
 import lombok.AllArgsConstructor;
 

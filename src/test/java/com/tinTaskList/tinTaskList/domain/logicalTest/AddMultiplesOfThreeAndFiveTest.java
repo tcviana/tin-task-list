@@ -1,6 +1,6 @@
-package com.tinTaskList.tinTaskList.domain;
+package com.tinTaskList.tinTaskList.domain.logicalTest;
 
-import com.tinTaskList.tinTaskList.domain.addMultiples.AddMultiplesOfThreeAndFive;
+import com.tinTaskList.tinTaskList.domain.logicalTest.addMultiples.AddMultiplesOfThreeAndFive;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.equalTo;

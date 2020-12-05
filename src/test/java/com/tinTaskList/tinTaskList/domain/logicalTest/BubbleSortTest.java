@@ -1,6 +1,6 @@
-package com.tinTaskList.tinTaskList.domain;
+package com.tinTaskList.tinTaskList.domain.logicalTest;
 
-import com.tinTaskList.tinTaskList.domain.bubbleSort.BubbleSort;
+import com.tinTaskList.tinTaskList.domain.logicalTest.bubbleSort.BubbleSort;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.equalTo;
