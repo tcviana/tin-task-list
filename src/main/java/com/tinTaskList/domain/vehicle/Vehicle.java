@@ -19,7 +19,7 @@ public class Vehicle {
 
     @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_seq")
     private long id;
 
     @Column(name = "veiculo")

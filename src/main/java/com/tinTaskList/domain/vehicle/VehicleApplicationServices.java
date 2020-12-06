@@ -1,6 +1,7 @@
 package com.tinTaskList.domain.vehicle;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -17,5 +18,9 @@ public class VehicleApplicationServices {
 
     public void post(final Vehicle vehicle) {
         repository.save(vehicle);
+    }
+
+    public void deleteVehicle(final Long id) {
+        repository.deleteById(id);
     }
 }

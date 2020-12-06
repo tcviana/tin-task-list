@@ -45,4 +45,16 @@ public class VehicleControllerTest {
                 .andExpect(status().is4xxClientError());
     }
 
+    @Test
+    public void shouldDeleteVehicle() throws Exception {
+        this.mockMvc.perform(delete("/vehicle/3"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void shouldExceptionDeleteInvalidVehicle() throws Exception {
+        this.mockMvc.perform(delete("/vehicle/111"))
+                .andExpect(status().isNotFound());
+    }
+
 }

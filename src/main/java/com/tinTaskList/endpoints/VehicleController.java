@@ -37,4 +37,13 @@ public class VehicleController {
         return ResponseEntity.created(uri).body(new VehicleDto(vehicle));
 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeVehicle(@PathVariable("id") final Long id) {
+        if (services.findById(id).isPresent()) {
+            services.deleteVehicle(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
