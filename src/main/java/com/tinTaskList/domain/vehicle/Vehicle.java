@@ -2,6 +2,8 @@ package com.tinTaskList.domain.vehicle;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -11,6 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "VEHICLE")
 @Getter
+@Setter
+@NoArgsConstructor
 public class Vehicle {
 
     @Column(name = "id")
@@ -22,7 +26,8 @@ public class Vehicle {
     private String veiculo;
 
     @Column(name = "marca")
-    private String marca;
+    @Enumerated(EnumType.STRING)
+    private Marca marca;
 
     @Column(name = "ano")
     private int ano;
@@ -41,7 +46,7 @@ public class Vehicle {
     @Column(name = "updated")
     private Date updated;
 
-    public Vehicle(String veiculo, String marca, int ano, String descricao, boolean vendido) {
+    public Vehicle(String veiculo, Marca marca, int ano, String descricao, boolean vendido) {
         this.veiculo = veiculo;
         this.marca = marca;
         this.ano = ano;

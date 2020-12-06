@@ -16,16 +16,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql({"Clear.sql", "VehicleTest.sql"})
 public class VehicleControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    private String getNewVehicle() {
-        final String newVehicle = "{\"veiculo\": \"Ka\", \"marca\": \"Ford\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
-        return newVehicle;
-    }
 
     @Test
     public void shouldFindById() throws Exception {
@@ -37,11 +31,18 @@ public class VehicleControllerTest {
 
     @Test
     public void shouldPostVehicle() throws Exception {
-
-        this.mockMvc.perform(post("/vehicle").content(getNewVehicle()).contentType(MediaType.APPLICATION_JSON))
+        String json = "{\"veiculo\": \"Ka\", \"marca\": \"FORD\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
+        this.mockMvc.perform(post("/vehicle").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("veiculo", equalTo("Ka")));
 
+    }
+
+    @Test
+    public void shouldExceptionInvalidMarca() throws Exception {
+        String json = "{\"veiculo\": \"FUSION\", \"marca\": \"FORDE\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
+        this.mockMvc.perform(put("/vehicle").content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is4xxClientError());
     }
 
 }

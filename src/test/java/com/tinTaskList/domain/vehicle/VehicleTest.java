@@ -17,7 +17,6 @@ public class VehicleTest {
     VehicleApplicationServices services;
 
     @Test
-    @Sql({"Clear.sql", "VehicleTest.sql"})
     public void shouldFindById() {
         final Optional<Vehicle> optionalVehicle = services.findById(1L);
 
@@ -27,7 +26,7 @@ public class VehicleTest {
         assertThat(vehicle.getAno(), equalTo(1990));
         assertThat(vehicle.getId(), equalTo(1L));
         assertThat(vehicle.getVeiculo(), equalTo("UNO"));
-        assertThat(vehicle.getMarca(), equalTo("FIAT"));
+        assertThat(vehicle.getMarca(), equalTo(Marca.FIAT));
         assertThat(vehicle.getDescricao(), equalTo("COMPLETO"));
         assertThat(vehicle.isVendido(), equalTo(false));
         assertThat(vehicle.getCreated().toString(), equalTo("2010-10-10 00:00:00.0"));

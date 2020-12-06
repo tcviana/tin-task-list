@@ -1,6 +1,8 @@
 package com.tinTaskList.infra.dto;
 
+import com.tinTaskList.domain.vehicle.Marca;
 import com.tinTaskList.domain.vehicle.Vehicle;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Date;
@@ -13,7 +15,7 @@ public class VehicleDto {
 
     private long id;
     private String veiculo;
-    private String marca;
+    private Marca marca;
     private int ano;
     private String descricao;
     private boolean vendido;
