@@ -1,8 +1,5 @@
 package com.tinTaskList.domain.vehicle;
 
-import com.tinTaskList.domain.logicalTest.vehicle.Vehicle;
-import com.tinTaskList.domain.logicalTest.vehicle.VehicleApplicationServices;
-import com.tinTaskList.domain.logicalTest.vehicle.VehicleRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,9 +12,6 @@ import java.util.Optional;
 
 @SpringBootTest
 public class VehicleTest {
-
-    @Autowired
-    private VehicleRepository repository;
 
     @Autowired
     VehicleApplicationServices services;

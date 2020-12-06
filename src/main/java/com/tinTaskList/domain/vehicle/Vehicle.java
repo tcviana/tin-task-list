@@ -1,4 +1,4 @@
-package com.tinTaskList.domain.logicalTest.vehicle;
+package com.tinTaskList.domain.vehicle;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
