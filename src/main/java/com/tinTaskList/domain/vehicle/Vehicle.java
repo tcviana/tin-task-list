@@ -53,4 +53,12 @@ public class Vehicle {
         this.descricao = descricao;
         this.vendido = vendido;
     }
+
+    public void sell() {
+        this.vendido = true;
+    }
+
+    public void purchase() {
+        this.vendido = false;
+    }
 }

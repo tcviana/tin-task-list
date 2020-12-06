@@ -57,4 +57,26 @@ public class VehicleControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void shouldUpdateVehicle() throws Exception {
+        final String json = "{\"id\": 2, \"veiculo\": \"CRUZE\"}";
+        this.mockMvc.perform(put("/vehicle/2").content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("veiculo", equalTo("CRUZE")));
+    }
+
+    @Test
+    public void shouldShouldSellVehicle() throws Exception {
+        this.mockMvc.perform(patch("/vehicle/2/sell").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("vendido", equalTo(true)));
+    }
+
+    @Test
+    public void shouldShouldPurchaseVehicle() throws Exception {
+        this.mockMvc.perform(patch("/vehicle/4/purchase").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("vendido", equalTo(false)));
+    }
+
 }

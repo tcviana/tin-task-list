@@ -46,4 +46,26 @@ public class VehicleController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<VehicleDto> updateVehicle(@PathVariable final Long id, @RequestBody VehicleForm form) {
+        Vehicle vehicle = services.update(form.convertToVehicle());
+        return ResponseEntity.ok(new VehicleDto(vehicle));
+    }
+
+    @PatchMapping("/{id}/sell")
+    public ResponseEntity<VehicleDto> sellVehicle(@PathVariable final Long id) {
+        Vehicle vehicle = services.findById(id).get();
+        vehicle.sell();
+        services.update(vehicle);
+        return ResponseEntity.ok(new VehicleDto(vehicle));
+    }
+
+    @PatchMapping("/{id}/purchase")
+    public ResponseEntity<VehicleDto> purchaseVehicle(@PathVariable final Long id) {
+        Vehicle vehicle = services.findById(id).get();
+        vehicle.purchase();
+        services.update(vehicle);
+        return ResponseEntity.ok(new VehicleDto(vehicle));
+    }
 }
