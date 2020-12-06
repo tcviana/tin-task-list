@@ -1,6 +1,6 @@
-package com.tinTaskList.tinTaskList.domain.logicalTest;
+package com.tinTaskList.domain.logicalTest;
 
-import com.tinTaskList.tinTaskList.domain.logicalTest.electionTask.ElectionTask;
+import com.tinTaskList.domain.logicalTest.electionTask.ElectionTask;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static org.hamcrest.CoreMatchers.equalTo;

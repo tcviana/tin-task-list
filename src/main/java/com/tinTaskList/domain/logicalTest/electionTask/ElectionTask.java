@@ -1,4 +1,4 @@
-package com.tinTaskList.tinTaskList.domain.logicalTest.electionTask;
+package com.tinTaskList.domain.logicalTest.electionTask;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.tinTaskList.tinTaskList.domain.logicalTest.bubbleSort;
+package com.tinTaskList.domain.logicalTest.bubbleSort;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
