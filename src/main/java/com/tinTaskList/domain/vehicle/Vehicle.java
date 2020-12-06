@@ -1,5 +1,6 @@
 package com.tinTaskList.domain.vehicle;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -39,4 +40,12 @@ public class Vehicle {
     @LastModifiedDate
     @Column(name = "updated")
     private Date updated;
+
+    public Vehicle(String veiculo, String marca, int ano, String descricao, boolean vendido) {
+        this.veiculo = veiculo;
+        this.marca = marca;
+        this.ano = ano;
+        this.descricao = descricao;
+        this.vendido = vendido;
+    }
 }

@@ -14,4 +14,8 @@ public class VehicleApplicationServices {
     public Optional<Vehicle> findById(final Long id) {
         return repository.findById(id);
     }
+
+    public void post(final Vehicle vehicle) {
+        repository.save(vehicle);
+    }
 }
