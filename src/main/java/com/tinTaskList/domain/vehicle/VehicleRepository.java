@@ -4,6 +4,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
 
     Page<Vehicle> findByVendido(Boolean vendido, Pageable page);
@@ -13,4 +16,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
     Integer countByAnoBetween(Integer initialYear, Integer finalYear);
 
     Integer countByMarca(Marca marca);
+
+    Page<Vehicle> findByCreatedGreaterThan(Date weekPassed, Pageable page);
 }

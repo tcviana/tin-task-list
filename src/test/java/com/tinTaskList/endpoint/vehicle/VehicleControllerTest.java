@@ -88,7 +88,8 @@ public class VehicleControllerTest {
         this.mockMvc.perform(get("/vehicle/not-sold").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("totalElements", equalTo(4)))
-                .andExpect(jsonPath(".[0].vendido", hasItem(false)));
+                .andExpect(jsonPath(".[0].vendido", hasItem(false)))
+                .andDo(print());
     }
 
     @Test
@@ -119,6 +120,11 @@ public class VehicleControllerTest {
                 .andExpect(jsonPath("value", equalTo(3)));
     }
 
-    
+    @Test
+    public void shouldListByLastWeek() throws Exception {
+        this.mockMvc.perform(get("/vehicle/last-week").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
 
 }

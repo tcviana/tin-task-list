@@ -74,13 +74,13 @@ public class VehicleController {
 
     @GetMapping("/not-sold")
     public Page<VehicleDto> listNotSoldVehicle(@PageableDefault(sort = "ano", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable page) {
-        Page<Vehicle> vehicles = services.findByVendido(false, page);
+        Page<Vehicle> vehicles = services.findByNotVendido(page);
         return VehicleDto.convertList(vehicles);
     }
 
     @GetMapping("/sold")
     public Page<VehicleDto> listSoldVehicle(@PageableDefault(sort = "ano", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable page) {
-        Page<Vehicle> vehicles = services.findByVendido(true, page);
+        Page<Vehicle> vehicles = services.findByVendido(page);
         return VehicleDto.convertList(vehicles);
     }
 
@@ -106,6 +106,12 @@ public class VehicleController {
     public String countByMarca(@PathVariable final Marca marca) {
         final String json = createJson(services.countByMarca(marca));
         return json;
+    }
+
+    @GetMapping("/last-week")
+    public Page<VehicleDto> retrieveRecordLastWeek(@PageableDefault(sort = "ano", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable page) {
+        Page<Vehicle> vehicles = services.findByRecordLastWeek(page);
+        return VehicleDto.convertList(vehicles);
     }
 
     private String createJson(Integer i) {
