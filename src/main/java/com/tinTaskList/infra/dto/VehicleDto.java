@@ -19,12 +19,12 @@ import java.util.Optional;
 @Getter
 public class VehicleDto {
 
-    private long id;
+    private Long id;
     private String veiculo;
     private Marca marca;
-    private int ano;
+    private Integer ano;
     private String descricao;
-    private boolean vendido;
+    private Boolean vendido;
     private Date created;
     private Date updated;
 
