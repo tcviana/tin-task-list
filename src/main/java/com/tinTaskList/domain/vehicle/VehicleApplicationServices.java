@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -32,8 +33,12 @@ public class VehicleApplicationServices {
         return repository.save(vehicle);
     }
 
-    public void deleteVehicle(final Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<?> deleteVehicle(final Long id) {
+        if (findById(id).isPresent()) {
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     public Vehicle update(Vehicle vehicle) {
@@ -74,5 +79,19 @@ public class VehicleApplicationServices {
     public Page<Vehicle> find(VehicleFilter filter, Pageable page) {
         final Specification<Vehicle> specification = vehicleSpecification.specification(filter);
         return repository.findAll(specification, page);
+    }
+
+    public Vehicle notSellVehicle(Long id) {
+        Vehicle vehicle = findById(id).get();
+        vehicle.notSell();
+        repository.save(vehicle);
+        return vehicle;
+    }
+
+    public Vehicle sellVehicle(Long id) {
+        Vehicle vehicle = findById(id).get();
+        vehicle.sell();
+        repository.save(vehicle);
+        return vehicle;
     }
 }

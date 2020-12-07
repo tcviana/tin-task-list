@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 @RestController
-@RequestMapping("/vehicle")
+@RequestMapping("/vehicles")
 public class VehicleController {
 
     @Autowired
@@ -44,11 +43,7 @@ public class VehicleController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> removeVehicle(@PathVariable("id") final Long id) {
-        if (services.findById(id).isPresent()) {
-            services.deleteVehicle(id);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
+        return services.deleteVehicle(id);
     }
 
     @PutMapping("/{id}")
@@ -59,18 +54,12 @@ public class VehicleController {
 
     @PatchMapping("/{id}/sell")
     public ResponseEntity<VehicleDto> sellVehicle(@PathVariable final Long id) {
-        Vehicle vehicle = services.findById(id).get();
-        vehicle.sell();
-        services.update(vehicle);
-        return ResponseEntity.ok(new VehicleDto(vehicle));
+        return ResponseEntity.ok(new VehicleDto(services.sellVehicle(id)));
     }
 
     @PatchMapping("/{id}/not-sell")
     public ResponseEntity<VehicleDto> notSellVehicle(@PathVariable final Long id) {
-        Vehicle vehicle = services.findById(id).get();
-        vehicle.notSell();
-        services.update(vehicle);
-        return ResponseEntity.ok(new VehicleDto(vehicle));
+        return ResponseEntity.ok(new VehicleDto(services.notSellVehicle(id)));
     }
 
     @GetMapping("/not-sold")
@@ -85,26 +74,26 @@ public class VehicleController {
         return VehicleDto.convertList(vehicles);
     }
 
-    @GetMapping("/sold/count")
-    public String countSold() {
+    @GetMapping("/sold/total")
+    public String totalSold() {
         final String json = createJson(services.countSold());
         return json;
     }
 
-    @GetMapping("/not-sold/count")
-    public String countNotSold() {
+    @GetMapping("/not-sold/total")
+    public String totalNotSold() {
         final String json = createJson(services.countNotSold());
         return json;
     }
 
-    @GetMapping("/decade/count/{year}")
-    public String countByDecade(@PathVariable final Integer year) {
+    @GetMapping("/decade/{year}/total")
+    public String totalByDecade(@PathVariable final Integer year) {
         final String json = createJson(services.countDecadeByYear(year));
         return json;
     }
 
-    @GetMapping("/marca/count/{marca}")
-    public String countByMarca(@PathVariable final Marca marca) {
+    @GetMapping("/marca/{marca}/total")
+    public String totalByMarca(@PathVariable final Marca marca) {
         final String json = createJson(services.countByMarca(marca));
         return json;
     }
