@@ -1,3 +1,10 @@
+/**
+* Esta classe representa os serviços do {@link com.tinTaskList.domain.vehicle.Vehicle}.
+*
+* @author  Tiago Coutinho Viana
+* @version  1.0
+*/
+
 package com.tinTaskList.domain.vehicle;
 
 import lombok.AllArgsConstructor;

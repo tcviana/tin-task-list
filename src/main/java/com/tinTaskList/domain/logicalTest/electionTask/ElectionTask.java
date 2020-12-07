@@ -1,3 +1,13 @@
+/**
+* Esta classe realiza a relação do total de eleitores considerando 
+* votos válidos, nulos e brancos.
+* <p>Para utilizá-la informe os votos válidos, brancos e nulos ao construtor, 
+* e chame seus métodos para retornar a relação desejada. </p>
+*
+* @author  Tiago Coutinho Viana
+* @version  1.0
+*/
+
 package com.tinTaskList.domain.logicalTest.electionTask;
 
 import lombok.AllArgsConstructor;

@@ -1,3 +1,10 @@
+/**
+* Esta classe representa o veículo com suas características.
+*
+* @author  Tiago Coutinho Viana
+* @version  1.0
+*/
+
 package com.tinTaskList.domain.vehicle;
 
 import lombok.AllArgsConstructor;

@@ -1,3 +1,10 @@
+/**
+ * Esta classe representa a entrada do {@link com.tinTaskList.domain.vehicle.Vehicle} como objeto json.
+ *
+ * @author  Tiago Coutinho Viana
+ * @version  1.0
+ */
+
 package com.tinTaskList.infra.dto;
 
 import com.tinTaskList.domain.vehicle.Marca;

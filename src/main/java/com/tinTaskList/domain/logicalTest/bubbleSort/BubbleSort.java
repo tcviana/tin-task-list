@@ -1,3 +1,12 @@
+/**
+* Esta classe realiza a ordenação de um vetor utilizando o conceito Bublle Sort.
+* <p> Utilização: informe um vetor em seu construtor e chame o 
+* método público <b>order</b>. </p>
+*
+* @author  Tiago Coutinho Viana
+* @version  1.0
+*/
+
 package com.tinTaskList.domain.logicalTest.bubbleSort;
 
 import lombok.AllArgsConstructor;

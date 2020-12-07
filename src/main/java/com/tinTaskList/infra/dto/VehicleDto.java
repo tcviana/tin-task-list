@@ -1,15 +1,20 @@
+/**
+ * Esta classe representa a trasnferência do {@link com.tinTaskList.domain.vehicle.Vehicle}
+ * para ser utilizada como objeto json.
+ *
+ * @author  Tiago Coutinho Viana
+ * @version  1.0
+ */
+
 package com.tinTaskList.infra.dto;
 
 import com.tinTaskList.domain.vehicle.Marca;
 import com.tinTaskList.domain.vehicle.Vehicle;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Getter
 public class VehicleDto {
