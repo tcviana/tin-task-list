@@ -23,16 +23,16 @@ public class VehicleForm {
 
     private String veiculo;
     private Marca marca;
-    private int ano;
+    private Integer ano;
     private String descricao;
-    private boolean vendido;
+    private Boolean vendido;
 
     public VehicleForm(VehicleForm vehicle) {
         this.veiculo = vehicle.getVeiculo();
         this.marca = vehicle.getMarca();
         this.ano = vehicle.getAno();
         this.descricao = vehicle.getDescricao();
-        this.vendido = vehicle.isVendido();
+        this.vendido = vehicle.getVendido();
     }
 
     public Vehicle convertToVehicle() {
