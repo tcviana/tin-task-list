@@ -7,9 +7,10 @@
 
 package com.tinTaskList.domain.vehicle;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
@@ -17,10 +18,11 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class VehicleApplicationServices {
 
     private final VehicleRepository repository;
+    private final VehicleSpecification vehicleSpecification;
 
     public Optional<Vehicle> findById(final Long id) {
         return repository.findById(id);
@@ -67,5 +69,10 @@ public class VehicleApplicationServices {
     public Page<Vehicle> findByRecordLastWeek(Pageable page) {
         final Date weekPassed = Date.valueOf(LocalDate.now().plusDays(-7));
         return repository.findByCreatedGreaterThan(weekPassed,page);
+    }
+
+    public Page<Vehicle> find(VehicleFilter filter, Pageable page) {
+        final Specification<Vehicle> specification = vehicleSpecification.specification(filter);
+        return repository.findAll(specification, page);
     }
 }

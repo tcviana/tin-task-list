@@ -127,4 +127,26 @@ public class VehicleControllerTest {
                 .andDo(print());
     }
 
+    @Test
+    public void shouldFindVehicle() throws Exception {
+        this.mockMvc.perform(get("/vehicle/find").contentType(MediaType.APPLICATION_JSON)
+                .param("marca", "VW"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("totalElements", equalTo(3)));
+
+        this.mockMvc.perform(get("/vehicle/find").contentType(MediaType.APPLICATION_JSON)
+                .param("marca", "VW")
+                .param("veiculo", "UP")
+                .param("descricao", "TSI")
+                .param("ano", "2018"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("totalElements", equalTo(1)));
+
+        this.mockMvc.perform(get("/vehicle/find").contentType(MediaType.APPLICATION_JSON)
+            .param("veiculo", "CIVIC"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("totalElements", equalTo(1)))
+                .andExpect(jsonPath(".veiculo", hasItem("CIVIC")));
+    }
+
 }

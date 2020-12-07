@@ -3,6 +3,7 @@ package com.tinTaskList.endpoints;
 import com.tinTaskList.domain.vehicle.Marca;
 import com.tinTaskList.domain.vehicle.Vehicle;
 import com.tinTaskList.domain.vehicle.VehicleApplicationServices;
+import com.tinTaskList.domain.vehicle.VehicleFilter;
 import com.tinTaskList.infra.dto.VehicleDto;
 import com.tinTaskList.infra.dto.VehicleForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,4 +119,9 @@ public class VehicleController {
         return "{\"value\": " + i + "}";
     }
 
+    @GetMapping("/find")
+    public Page<VehicleDto> retrieveWithFilter(final VehicleFilter filter, final Pageable page) {
+        Page<Vehicle> vehicles = services.find(filter, page);
+        return VehicleDto.convertList(vehicles);
+    }
 }
