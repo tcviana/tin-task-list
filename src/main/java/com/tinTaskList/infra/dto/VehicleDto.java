@@ -4,6 +4,7 @@ import com.tinTaskList.domain.vehicle.Marca;
 import com.tinTaskList.domain.vehicle.Vehicle;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.data.domain.Page;
 
 import java.util.Date;
 import java.util.List;
@@ -44,7 +45,7 @@ public class VehicleDto {
         this.updated = vehicle.get().getUpdated();
     }
 
-    public static List<VehicleDto> convertList(List<Vehicle> vehicles) {
-        return vehicles.stream().map(VehicleDto::new).collect(Collectors.toList());
+    public static Page<VehicleDto> convertList(Page<Vehicle> vehicles) {
+        return vehicles.map(VehicleDto::new);
     }
 }

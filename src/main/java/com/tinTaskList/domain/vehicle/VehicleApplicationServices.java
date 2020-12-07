@@ -1,6 +1,8 @@
 package com.tinTaskList.domain.vehicle;
 
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -27,4 +29,15 @@ public class VehicleApplicationServices {
         return repository.save(vehicle);
     }
 
+    public Page<Vehicle> findByVendido(boolean vendido, Pageable page) {
+        return repository.findByVendido(vendido, page);
+    }
+
+    public Integer countSold() {
+        return repository.countByVendido(true);
+    }
+
+    public Integer countNotSold() {
+        return repository.countByVendido(false);
+    }
 }

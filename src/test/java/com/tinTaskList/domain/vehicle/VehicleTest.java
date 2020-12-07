@@ -3,11 +3,12 @@ package com.tinTaskList.domain.vehicle;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.jdbc.Sql;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.any;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Date;
 import java.util.Optional;
 
 @SpringBootTest
@@ -29,7 +30,7 @@ public class VehicleTest {
         assertThat(vehicle.getMarca(), equalTo(Marca.FIAT));
         assertThat(vehicle.getDescricao(), equalTo("COMPLETO"));
         assertThat(vehicle.isVendido(), equalTo(false));
-        assertThat(vehicle.getCreated().toString(), equalTo("2010-10-10 00:00:00.0"));
-        assertThat(vehicle.getUpdated().toString(), equalTo("2010-10-10 00:00:00.0"));
+        assertThat(vehicle.getCreated(), any(Date.class));
+        assertThat(vehicle.getUpdated(), any(Date.class));
     }
 }

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -13,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,15 +30,6 @@ public class VehicleControllerTest {
     }
 
     @Test
-    public void shouldPostVehicle() throws Exception {
-        String json = "{\"veiculo\": \"Ka\", \"marca\": \"FORD\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
-        this.mockMvc.perform(post("/vehicle").content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("veiculo", equalTo("Ka")));
-
-    }
-
-    @Test
     public void shouldExceptionInvalidMarca() throws Exception {
         String json = "{\"veiculo\": \"FUSION\", \"marca\": \"FORDE\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
         this.mockMvc.perform(put("/vehicle").content(json).contentType(MediaType.APPLICATION_JSON))
@@ -46,8 +37,13 @@ public class VehicleControllerTest {
     }
 
     @Test
-    public void shouldDeleteVehicle() throws Exception {
-        this.mockMvc.perform(delete("/vehicle/3"))
+    public void shouldPostDeleteVehicle() throws Exception {
+        String json = "{\"veiculo\": \"Ka\", \"marca\": \"FORD\", \"ano\": 2015, \"descricao\": \"Completo\", \"vendido\": false}";
+        this.mockMvc.perform(post("/vehicle").content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("id", equalTo(8)));
+
+        this.mockMvc.perform(delete("/vehicle/8"))
                 .andExpect(status().isOk());
     }
 
@@ -73,10 +69,40 @@ public class VehicleControllerTest {
     }
 
     @Test
-    public void shouldShouldPurchaseVehicle() throws Exception {
-        this.mockMvc.perform(patch("/vehicle/4/purchase").contentType(MediaType.APPLICATION_JSON))
+    public void shouldNotSellVehicle() throws Exception {
+        this.mockMvc.perform(patch("/vehicle/4/not-sell").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("vendido", equalTo(false)));
+    }
+
+    @Test
+    public void shouldListSoldVehicles() throws Exception {
+        this.mockMvc.perform(get("/vehicle/sold").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("totalElements", equalTo(3)))
+                .andExpect(jsonPath(".[0].vendido", hasItem(true)));
+    }
+
+    @Test
+    public void shouldListNotSoldVehicles() throws Exception {
+        this.mockMvc.perform(get("/vehicle/not-sold").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("totalElements", equalTo(4)))
+                .andExpect(jsonPath(".[0].vendido", hasItem(false)));
+    }
+
+    @Test
+    public void shouldCountSoldVehicles() throws Exception {
+        this.mockMvc.perform(get("/vehicle/sold/count"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("value", equalTo(3)));
+    }
+
+    @Test
+    public void shouldCountNotSoldVehicles() throws Exception {
+        this.mockMvc.perform(get("/vehicle/not-sold/count"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("value", equalTo(4)));
     }
 
 }

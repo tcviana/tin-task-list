@@ -19,7 +19,7 @@ public class Vehicle {
 
     @Column(name = "id")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vehicle_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vehicle_seq")
     private long id;
 
     @Column(name = "veiculo")
@@ -58,7 +58,7 @@ public class Vehicle {
         this.vendido = true;
     }
 
-    public void purchase() {
+    public void notSell() {
         this.vendido = false;
     }
 }

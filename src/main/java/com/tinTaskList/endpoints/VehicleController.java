@@ -4,16 +4,18 @@ import com.tinTaskList.domain.vehicle.Vehicle;
 import com.tinTaskList.domain.vehicle.VehicleApplicationServices;
 import com.tinTaskList.infra.dto.VehicleDto;
 import com.tinTaskList.infra.dto.VehicleForm;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 
 @RestController
 @RequestMapping("/vehicle")
@@ -61,11 +63,39 @@ public class VehicleController {
         return ResponseEntity.ok(new VehicleDto(vehicle));
     }
 
-    @PatchMapping("/{id}/purchase")
-    public ResponseEntity<VehicleDto> purchaseVehicle(@PathVariable final Long id) {
+    @PatchMapping("/{id}/not-sell")
+    public ResponseEntity<VehicleDto> notSellVehicle(@PathVariable final Long id) {
         Vehicle vehicle = services.findById(id).get();
-        vehicle.purchase();
+        vehicle.notSell();
         services.update(vehicle);
         return ResponseEntity.ok(new VehicleDto(vehicle));
+    }
+
+    @GetMapping("/not-sold")
+    public Page<VehicleDto> listNotSoldVehicle(@PageableDefault(sort = "ano", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable page) {
+        Page<Vehicle> vehicles = services.findByVendido(false, page);
+        return VehicleDto.convertList(vehicles);
+    }
+
+    @GetMapping("/sold")
+    public Page<VehicleDto> listSoldVehicle(@PageableDefault(sort = "ano", direction = Sort.Direction.DESC, page = 0, size = 10) Pageable page) {
+        Page<Vehicle> vehicles = services.findByVendido(true, page);
+        return VehicleDto.convertList(vehicles);
+    }
+
+    @GetMapping("/sold/count")
+    public String countSold() {
+        final String json = createJson(services.countSold());
+        return json;
+    }
+
+    @GetMapping("/not-sold/count")
+    public String countNotSold() {
+        final String json = createJson(services.countNotSold());
+        return json;
+    }
+
+    private String createJson(Integer i) {
+        return "{\"value\": " + i + "}";
     }
 }
