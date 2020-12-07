@@ -1,5 +1,6 @@
 package com.tinTaskList.endpoints;
 
+import com.tinTaskList.domain.vehicle.Marca;
 import com.tinTaskList.domain.vehicle.Vehicle;
 import com.tinTaskList.domain.vehicle.VehicleApplicationServices;
 import com.tinTaskList.infra.dto.VehicleDto;
@@ -95,7 +96,20 @@ public class VehicleController {
         return json;
     }
 
+    @GetMapping("/decade/count/{year}")
+    public String countByDecade(@PathVariable final Integer year) {
+        final String json = createJson(services.countDecadeByYear(year));
+        return json;
+    }
+
+    @GetMapping("/marca/count/{marca}")
+    public String countByMarca(@PathVariable final Marca marca) {
+        final String json = createJson(services.countByMarca(marca));
+        return json;
+    }
+
     private String createJson(Integer i) {
         return "{\"value\": " + i + "}";
     }
+
 }

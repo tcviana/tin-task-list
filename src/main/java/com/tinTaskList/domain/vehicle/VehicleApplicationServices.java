@@ -40,4 +40,14 @@ public class VehicleApplicationServices {
     public Integer countNotSold() {
         return repository.countByVendido(false);
     }
+
+    public Integer countDecadeByYear(Integer year) {
+        final Integer initialYear = (year / 10) * 10;
+        final Integer finalYear = initialYear + 9;
+        return repository.countByAnoBetween(initialYear, finalYear);
+    }
+
+    public Integer countByMarca(Marca marca) {
+        return repository.countByMarca(marca);
+    }
 }

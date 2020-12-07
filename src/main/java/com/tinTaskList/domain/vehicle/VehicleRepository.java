@@ -9,4 +9,8 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
     Page<Vehicle> findByVendido(Boolean vendido, Pageable page);
 
     Integer countByVendido(Boolean vendido);
+
+    Integer countByAnoBetween(Integer initialYear, Integer finalYear);
+
+    Integer countByMarca(Marca marca);
 }

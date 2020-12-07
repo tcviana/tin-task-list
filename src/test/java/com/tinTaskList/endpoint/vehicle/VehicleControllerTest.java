@@ -105,4 +105,20 @@ public class VehicleControllerTest {
                 .andExpect(jsonPath("value", equalTo(4)));
     }
 
+    @Test
+    public void shouldCountDecade() throws Exception {
+        this.mockMvc.perform(get("/vehicle/decade/count/2015"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("value", equalTo(4)));
+    }
+
+    @Test
+    public void shouldCountByMarca() throws Exception {
+        this.mockMvc.perform(get("/vehicle/marca/count/VW"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("value", equalTo(3)));
+    }
+
+    
+
 }
